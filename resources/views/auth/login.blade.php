@@ -33,52 +33,6 @@
                     autocomplete="current-password" />
             </div>
 
-            <div class="mt-4">
-                <x-label for="role" value="{{ __('Role') }}" />
-                <select id="role" name="role"
-                    class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                    <option value="Kodim" {{ old('role') == 'Kodim' ? 'selected' : '' }}>Kodim</option>
-                    <option value="Koranmil" {{ old('role') == 'Koranmil' ? 'selected' : '' }}>Koranmil</option>
-                    <option value="Babinsa" {{ old('role') == 'Babinsa' ? 'selected' : '' }}>Babinsa</option>
-                </select>
-            </div>
-
-            <!-- Sub-menu for Koranmil -->
-            <div id="koranmilSubMenu" style="display: none;" class="mt-4">
-                <x-label for="koranmilRole" value="{{ __('Koranmil Role') }}" />
-                <select id="koranmilRole" name="koranmil_role"
-                    class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                    <option value="Angkatan 1">Angkatan 1</option>
-                    <!-- Tambahkan opsi lain sesuai kebutuhan -->
-                </select>
-            </div>
-
-            <!-- Sub-menu for Babinsa -->
-            <div id="babinsaSubMenu" style="display: none;" class="mt-4">
-                <x-label for="babinsaRole" value="{{ __('Babinsa Role') }}" />
-                <select id="babinsaRole" name="babinsa_role"
-                    class="block mt-1 w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm">
-                    <option value="Angkatan 1">Angkatan 1</option>
-                    <option value="Angkatan 2">Angkatan 2</option>
-                    <!-- Tambahkan opsi lain sesuai kebutuhan -->
-                </select>
-            </div>
-
-            <script>
-                document.getElementById('role').addEventListener('change', function() {
-                    // Sembunyikan semua sub-menu terlebih dahulu
-                    document.getElementById('koranmilSubMenu').style.display = 'none';
-                    document.getElementById('babinsaSubMenu').style.display = 'none';
-
-                    // Tampilkan sub-menu yang sesuai dengan pilihan user
-                    if (this.value === 'Koranmil') {
-                        document.getElementById('koranmilSubMenu').style.display = 'block';
-                    } else if (this.value === 'Babinsa') {
-                        document.getElementById('babinsaSubMenu').style.display = 'block';
-                    }
-                });
-            </script>
-
             <div class="block mt-4">
                 <label for="remember_me" class="flex items-center">
                     <x-checkbox id="remember_me" name="remember" />

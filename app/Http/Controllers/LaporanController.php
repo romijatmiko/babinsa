@@ -58,7 +58,7 @@ class LaporanController extends Controller
             $validatedData = $request->validate([
                 'title' => 'required|string|max:255',
                 'isi' => 'required|string',
-                
+                'status' => 'required|string',
                 'img' => 'required|string|max:255',
                 'distrik' => 'required|string|max:255',
             ]);

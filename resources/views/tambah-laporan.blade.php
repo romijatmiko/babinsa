@@ -226,6 +226,7 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
+                                    <input type="hidden" name="status" value="pending">
                                     <div class="mb-3">
                                         <label for="label" class="form-label">Babinsa Distrik</label>
                                         <input type="text"
@@ -236,7 +237,7 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    <input type="hidden" name="status" value="pending">
+
                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                 </form>
                             </div>
