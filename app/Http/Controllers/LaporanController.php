@@ -34,10 +34,10 @@ class LaporanController extends Controller
     public function laporanDiterima()
     {
         // Mendapatkan daftar laporan dengan status 'diterima'
-        $laporanDiterima = Laporan::where('status', 'accepted')->get();
+        $laporanDiterima = Laporan::where('status', 'diterima')->get();
     
         // Mengirimkan data laporan diterima ke view
-        return view('list-laporan-accepted', compact('laporanDiterima'));
+        return view('list-laporan-diterima', compact('laporanDiterima'));
     }
 
     /**
@@ -61,6 +61,9 @@ class LaporanController extends Controller
                 'status' => 'required|string',
                 'img' => 'required|string|max:255',
                 'distrik' => 'required|string|max:255',
+                'imgs' => 'nullable|string', // Menjadikan kolom 'imgs' bisa NULL
+    'surat' => 'nullable|string', // Menjadikan kolom 'surat' bisa NULL
+    'pesan' => 'nullable|string', // Menjadikan kolom 'pesan' bisa NULL
             ]);
 
             // Simpan data ke database
@@ -75,7 +78,8 @@ class LaporanController extends Controller
             return redirect()->back()->with('error', 'Terjadi kesalahan. Silakan coba lagi.');
         }
     }
-
+    
+    
     /**
      * Show the form for editing the specified resource.
      */
@@ -88,6 +92,16 @@ class LaporanController extends Controller
         }
 
         return view('edit-laporan', compact('laporan'));
+    }
+ public function updateLaporan($id)
+    {
+        $laporan = Laporan::find($id);
+
+        if (!$laporan) {
+            return redirect()->route('update-laporan')->with('error', 'Data laporan tidak ditemukan.');
+        }
+
+        return view('update-laporan', compact('laporan'));
     }
 
     /**
@@ -102,6 +116,9 @@ class LaporanController extends Controller
             'img' => 'required|string',
             'status' => 'required|string',
             'distrik' => 'required|string',
+                     'imgs' => 'nullable|string', // Menjadikan kolom 'imgs' bisa NULL
+    'surat' => 'nullable|string', // Menjadikan kolom 'surat' bisa NULL
+    'pesan' => 'nullable|string', // Menjadikan kolom 'pesan' bisa NULL
         ]);
 
         $laporan->update($validatedData);

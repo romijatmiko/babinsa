@@ -180,152 +180,95 @@
 
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
-                    <!-- Content wrapper -->
-                    <!-- Content wrapper -->
+                    <!-- Content -->
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms/</span>
-                            Tambah Laporan</h4>
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables </span> List Laporan
+                        </h4>
 
-                        @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
+                        <!-- Basic Bootstrap Table -->
+                        <div class="card">
+                            <h5 class="card-header">List of Laporans</h5>
+                            <div class="table-responsive text-nowrap">
+                                <table class="table">
+                                    <!-- Table header -->
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Body</th>
+                                            <th>Status</th> <!-- New column for status -->
+                                            <th>Actions</th> <!-- New column for actions -->
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-border-bottom-0">
+                                        <!-- Loop through laporan and display each row -->
+                                        @foreach ($laporanDiterima as $laporans)
+                                            <tr>
+                                                <td>{{ implode(' ', array_slice(str_word_count($laporans->title, 1), 0, 3)) }}
+                                                </td>
+                                                <td>{{ implode(' ', array_slice(str_word_count($laporans->isi, 1), 0, 3)) }}
+                                                </td>
+                                                <td>{{ $laporans->status }}</td> <!-- Display status -->
+                                                <td>
+                                                    <!-- Edit button linking to the edit route with post id -->
+                                                    <a href="{{ route('update-laporan', ['id' => $laporans->id]) }}"
+                                                        class="btn btn-sm btn-primary">Update Sekarang</a>
+
+                                                    <!-- Delete button triggering form submission with post id -->
+
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+
+                                </table>
                             </div>
-                        @endif
+                        </div>
 
-                        <div class="card mb-4">
-                            <div class="card-header d-flex align-items-center justify-content-between">
-                                <h5 class="mb-0">Update Laporan</h5>
-                                <small class="text-muted float-end">Tambahkan Laporan baru</small>
-                            </div>
-                            <div class="card-body">
-                                <form method="post" action="{{ route('laporan.update', $laporan->id) }}">
-                                    @csrf
-                                    @method('PUT') <!-- Add this line for the update method -->
+                        <!-- Additional content as needed -->
 
-                                    <div class="mb-3">
-                                        <label for="title" class="form-label">Judul Laporan</label>
-                                        <input type="text"
-                                            class="form-control @error('title') is-invalid @enderror" id="title"
-                                            name="title" value="{{ $laporan->title }}" placeholder="Judul Laporan">
-                                        @error('title')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="isi" class="form-label">Isi</label>
-                                        <textarea class="form-control @error('isi') is-invalid @enderror" id="isi" name="isi"
-                                            placeholder="Isi Post">{{ $laporan->isi }}</textarea>
-                                        @error('isi')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="img" class="form-label">URL Gambar</label>
-                                        <input type="text" class="form-control @error('img') is-invalid @enderror"
-                                            id="img" name="img" value="{{ $laporan->img }}"
-                                            placeholder="URL Gambar">
-                                        @error('img')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="label" class="form-label">Babinsa Distrik</label>
-                                        <input type="text"
-                                            class="form-control @error('label') is-invalid @enderror" id="distrik"
-                                            name="distrik" value="{{ $laporan->distrik }}" placeholder="distrik">
-                                        @error('distrik')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="img" class="form-label">URL Gambar</label>
-                                        <input type="text" class="form-control @error('img') is-invalid @enderror"
-                                            id="img" name="img" value="{{ $laporan->img }}"
-                                            placeholder="URL Gambar">
-                                        @error('img')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="img" class="form-label">Foto Dokumentasi</label>
-                                        <input type="text" class="form-control @error('img') is-invalid @enderror"
-                                            id="img" name="imgs" value="{{ $laporan->imgs }}"
-                                            placeholder="Foto Dokumentasi">
-                                        @error('imgs')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="surat" class="form-label">Surat Selesai</label>
-                                        <input type="text"
-                                            class="form-control @error('surat') is-invalid @enderror" id="surat"
-                                            name="surat" value="{{ $laporan->surat }}"
-                                            placeholder="Surat Selesai">
-                                        @error('surat')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="pesan" class="form-label">Pesan Laporan</label>
-                                        <input type="text"
-                                            class="form-control @error('pesan') is-invalid @enderror" id="pesan"
-                                            name="pesan" value="{{ $laporan->pesan }}"
-                                            placeholder="Pesan Laporan">
-                                        @error('pesan')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    <input type="hidden" name="status" value="dikoreksi">
-                                    <button type="submit" class="btn btn-primary">Simpan</button>
-                                </form>
+                    </div>
+                    <!-- / Content wrapper -->
+                </div>
 
-                            </div>
+                {{-- <!-- Footer -->
+                <footer class="content-footer footer bg-footer-theme">
+                    <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                        <div class="mb-2 mb-md-0">
+                            ©
+                            <script>
+                                document.write(new Date().getFullYear());
+                            </script>
+                            , made with ❤️ by
+                            <a href="https://themeselection.com" target="_blank"
+                                class="footer-link fw-bolder">ThemeSelection</a>
+                        </div>
+                        <div>
+                            <a href="https://themeselection.com/license/" class="footer-link me-4"
+                                target="_blank">License</a>
+                            <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More
+                                Themes</a>
+
+                            <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
+                                target="_blank" class="footer-link me-4">Documentation</a>
+
+                            <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
+                                target="_blank" class="footer-link me-4">Support</a>
                         </div>
                     </div>
-                    <!-- / Content -->
+                </footer>
+                <!-- / Footer --> --}}
 
-
-                    <!-- Footer -->
-                    {{-- <footer class="content-footer footer bg-footer-theme">
-                        <div
-                            class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                            <div class="mb-2 mb-md-0">
-                                ©
-                                <script>
-                                    document.write(new Date().getFullYear());
-                                </script>
-                                , made with ❤️ by
-                                <a href="https://themeselection.com" target="_blank"
-                                    class="footer-link fw-bolder">ThemeSelection</a>
-                            </div>
-                            <div>
-                                <a href="https://themeselection.com/license/" class="footer-link me-4"
-                                    target="_blank">License</a>
-                                <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More
-                                    Themes</a>
-
-                                <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/documentation/"
-                                    target="_blank" class="footer-link me-4">Documentation</a>
-
-                                <a href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                                    target="_blank" class="footer-link me-4">Support</a>
-                            </div>
-                        </div>
-                    </footer> --}}
-                    <!-- / Footer -->
-
-                    <div class="content-backdrop fade"></div>
-                </div>
-                <!-- Content wrapper -->
+                <div class="content-backdrop fade"></div>
             </div>
-            <!-- / Layout page -->
+            <!-- Content wrapper -->
         </div>
+        <!-- / Layout page -->
+    </div>
 
-        <!-- Overlay -->
-        <div class="layout-overlay layout-menu-toggle"></div>
+    <!-- Overlay -->
+    <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
-
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->

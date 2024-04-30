@@ -11,7 +11,7 @@ class Laporan extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'isi', 'img', 'status', 'distrik'];
+    protected $fillable = ['title', 'isi', 'img', 'status', 'distrik', 'imgs', 'surat', 'pesan'];
 
     // Tidak ada hubungan dengan kategori dalam contoh ini
 }

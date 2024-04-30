@@ -237,7 +237,9 @@
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
-
+                                    <input type="hidden" name="imgs" value="null">
+                                    <input type="hidden" name="surat" value="null">
+                                    <input type="hidden" name="pesan" value="null">
                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                 </form>
                             </div>

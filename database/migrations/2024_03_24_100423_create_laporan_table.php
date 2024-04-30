@@ -18,6 +18,9 @@ return new class extends Migration
     $table->text('img');
     $table->string('status');
 	$table->string('distrik');
+    $table->string('imgs')->null();
+    $table->string('surat')->null();
+    $table->string('pesan')->null();
     $table->timestamps();
         });
         

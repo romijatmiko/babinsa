@@ -25,9 +25,10 @@ Route::middleware(['auth:sanctum', 'verified', 'check_babinsa'])->group(function
         return view('tambah-laporan');
     })->name('tambah-laporan');
      Route::get('/list-laporan-pending', [LaporanController::class, 'index'])->name('list-laporan-pending');
-Route::get('/list-laporan-accepted', [LaporanController::class, 'laporanDiterima'])->name('list-laporan-accepted');
+Route::get('/list-laporan-diterima', [LaporanController::class, 'laporanDiterima'])->name('list-laporan-diterima');
 Route::get('/list-laporan-rejected', [LaporanController::class, 'laporanDitolak'])->name('list-laporan-rejected');
     Route::get('/edit-laporan/{id}', [LaporanController::class, 'edit'])->name('edit-laporan');
+     Route::get('/update-laporan/{id}', [LaporanController::class, 'updateLaporan'])->name('update-laporan');
     Route::put('/laporan/{laporan}', [LaporanController::class, 'update'])->name('laporan.update');
     Route::delete('/laporan/{laporan}', [LaporanController::class, 'destroy'])->name('laporan.destroy');
     Route::get('/laporan/{laporan}', [LaporanController::class, 'show'])->name('laporan.show');

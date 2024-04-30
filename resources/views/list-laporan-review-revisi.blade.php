@@ -67,44 +67,42 @@
 
                 <ul class="menu-inner py-1">
                     <!-- Dashboard -->
-                    <ul class="menu-inner py-1">
-                        <!-- Dashboard -->
-                        <li class="menu-item active">
-                            <a href="/dashboard" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                                <div data-i18n="Analytics">Dashboard</div>
-                            </a>
-                        </li>
+                    <li class="menu-item active">
+                        <a href="/dashboard" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Dashboard</div>
+                        </a>
+                    </li>
 
-                        <!-- Layouts -->
+                    <!-- Layouts -->
 
-                        <!-- Components -->
-                        <li class="menu-header small text-uppercase"><span class="menu-header-text">Laporan</span></li>
-                        <!-- Cards -->
-                        <li class="menu-item">
-                            <a href="/tambah-laporan" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-collection"></i>
-                                <div data-i18n="Basic">Tambah Laporan</div>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="/list-laporan-pending" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-collection"></i>
-                                <div data-i18n="Basic">List Laporan Pending</div>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="/list-laporan-accepted" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-collection"></i>
-                                <div data-i18n="Basic">List Laporan Diterima</div>
-                            </a>
-                        </li>
-                        <li class="menu-item">
-                            <a href="/list-laporan-rejected" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-collection"></i>
-                                <div data-i18n="Basic">List Laporan Ditolak</div>
-                            </a>
-                        </li>
+                    <!-- Components -->
+                    <li class="menu-header small text-uppercase"><span class="menu-header-text">Laporan</span></li>
+                    <!-- Cards -->
+                    <li class="menu-item">
+                        <a href="/tambah-laporan" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Basic">Tambah Laporan</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/list-laporan-pending" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Basic">List Laporan Pending</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/list-laporan-accepted" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Basic">List Laporan Diterima</div>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="/list-laporan-rejected" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-collection"></i>
+                            <div data-i18n="Basic">List Laporan Ditolak</div>
+                        </a>
+                    </li>
 
 
             </aside>
@@ -197,31 +195,31 @@
                                         <tr>
                                             <th>Title</th>
                                             <th>Body</th>
-                                            <!-- Add more columns as needed -->
+                                            <th>Status</th> <!-- New column for status -->
                                             <th>Actions</th> <!-- New column for actions -->
                                         </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
                                         <!-- Loop through laporan and display each row -->
-                                        @foreach ($laporanDitolak as $laporan)
+                                        @foreach ($laporan as $laporan)
                                             <tr>
                                                 <td>{{ implode(' ', array_slice(str_word_count($laporan->title, 1), 0, 3)) }}
                                                 </td>
                                                 <td>{{ implode(' ', array_slice(str_word_count($laporan->isi, 1), 0, 3)) }}
                                                 </td>
-                                                <!-- Add more columns as needed -->
+                                                <td>{{ $laporan->status }}</td> <!-- Display status -->
                                                 <td>
                                                     <!-- Edit button linking to the edit route with post id -->
                                                     <a href="{{ route('edit-laporan', ['id' => $laporan->id]) }}"
-                                                        class="btn btn-sm btn-primary">Lihat Detail</a>
+                                                        class="btn btn-sm btn-primary">Review Sekarang</a>
 
                                                     <!-- Delete button triggering form submission with post id -->
 
                                                 </td>
                                             </tr>
                                         @endforeach
-
                                     </tbody>
+
                                 </table>
                             </div>
                         </div>
